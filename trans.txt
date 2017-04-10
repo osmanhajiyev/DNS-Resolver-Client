@@ -1,0 +1,511 @@
+rm -f *.class
+rm -f DNSlookup.jar
+javac DNSlookup.java
+jar cvfe DNSlookup.jar DNSlookup *.class
+added manifest
+adding: DNSlookup.class(in = 3892) (out= 2209)(deflated 43%)
+adding: DNSResponse.class(in = 5179) (out= 2944)(deflated 43%)
+
+
+Test 1 -----------------------------------------------
+
+
+java -jar DNSlookup.jar 198.162.35.1  www.cs.ubc.ca
+www.cs.ubc.ca 3600    A 142.103.6.5
+
+
+Test 2 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 www.cs.ubc.ca 
+www.cs.ubc.ca 3600    A 142.103.6.5
+
+
+Test 3 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 prep.ai.mit.edu 
+prep.ai.mit.edu 1800    CN ftp.gnu.org
+prep.ai.mit.edu 300    A 208.118.235.20
+
+
+Test 4 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 www.stanford.edu
+www.stanford.edu 60    A 52.37.14.176
+www.stanford.edu 60    A 52.32.123.204
+www.stanford.edu 60    A 52.26.62.109
+
+
+Test 5 ----------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 finance.google.ca
+finance.google.ca 345600    CN finance.google.com
+finance.google.ca 604800    CN www3.l.google.com
+finance.google.ca 300    A 172.217.3.206
+finance.google.ca 300    A 172.217.3.206
+
+
+Test 6 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 groups.yahoo.com
+groups.yahoo.com 300    CN fd-geoycpi-uno.gycpi.b.yahoodns.net
+Exception in thread "main" java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1967)
+	at DNSResponse.parseType2(DNSResponse.java:115)
+	at DNSResponse.<init>(DNSResponse.java:274)
+	at DNSlookup.main(DNSlookup.java:162)
+
+
+Test 7 -----------------------------------------------
+
+
+java -jar DNSlookup.jar 198.162.35.1 www.cs.ubc.ca -6
+www.cs.ubc.ca 3600    A 142.103.6.5
+
+
+Test 8 -----------------------------------------------
+
+
+java -jar DNSlookup.jar 199.7.83.42 www.cs.ubc.ca -6
+www.cs.ubc.ca 3600    A 142.103.6.5
+
+
+Test 9 -----------------------------------------------
+
+
+java -jar DNSlookup.jar 199.7.83.42 prep.ai.mit.edu -6
+prep.ai.mit.edu 1800    CN ftp.gnu.org
+prep.ai.mit.edu 300    A 208.118.235.20
+
+
+Test 10 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 finance.google.ca -6
+finance.google.ca 345600    CN finance.google.com
+finance.google.ca 604800    CN www3.l.google.com
+finance.google.ca 300    A 172.217.3.206
+finance.google.ca 300    A 172.217.3.206
+
+
+Test 11 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 www.stanford.edu -6
+www.stanford.edu 60    A 52.32.123.204
+www.stanford.edu 60    A 52.26.62.109
+www.stanford.edu 60    A 52.37.14.176
+
+
+Test 12 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   172.16.2.2  timeout.cs.ubc.ca
+timeout.cs.ubc.ca -2	A 0.0.0.0
+
+
+Test 13 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 wee.cs.ubc.ca
+wee.cs.ubc.ca -2	A 0.0.0.0
+
+
+Test 14 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 wee.cs.ubc.ca -6
+wee.cs.ubc.ca -2	A 0.0.0.0
+
+
+Test 15 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 loop1.csproject.org
+loop1.csproject.org 3600    CN loop2.csproject.org
+loop1.csproject.org 3600    CN loop1.csproject.org
+loop1.csproject.org 3600    CN loop2.csproject.org
+loop1.csproject.org 3600    CN loop1.csproject.org
+loop1.csproject.org 3600    CN loop2.csproject.org
+loop1.csproject.org 3600    CN loop1.csproject.org
+loop1.csproject.org 3600    CN loop2.csproject.org
+loop1.csproject.org 3600    CN loop1.csproject.org
+loop1.csproject.org 3600    CN loop2.csproject.org
+loop1.csproject.org 3600    CN loop1.csproject.org
+loop1.csproject.org 3600    CN loop2.csproject.org
+loop1.csproject.org 3600    CN loop1.csproject.org
+loop1.csproject.org 3600    CN loop2.csproject.org
+loop1.csproject.org 3600    CN loop1.csproject.org
+loop1.csproject.org 3600    CN loop2.csproject.org
+loop1.csproject.org 3600    CN loop1.csproject.org
+loop1.csproject.org 3600    CN loop2.csproject.org
+loop1.csproject.org 3600    CN loop1.csproject.org
+loop1.csproject.org 3600    CN loop2.csproject.org
+loop1.csproject.org 3600    CN loop1.csproject.org
+loop1.csproject.org -3	A 0.0.0.0
+
+
+Test 16 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 .ca
+Query ID     45729 .ca  A --> 199.7.83.42
+Response ID: 45729 Authoritative = false
+Query ID     46317 .ca  A --> 127.0.0.1
+.ca -2	A 0.0.0.0
+
+
+Test 17 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 www.stanford.edu -t
+Query ID     10546 www.stanford.edu  A --> 199.7.83.42
+Response ID: 10546 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+       edu                            172800     NS   a.edu-servers.net
+       edu                            172800     NS   c.edu-servers.net
+       edu                            172800     NS   d.edu-servers.net
+       edu                            172800     NS   f.edu-servers.net
+       edu                            172800     NS   g.edu-servers.net
+       edu                            172800     NS   l.edu-servers.net
+  Additional Information (7)
+       a.edu-servers.net              172800     A    192.5.6.30
+       c.edu-servers.net              172800     A    192.26.92.30
+       d.edu-servers.net              172800     A    192.31.80.30
+       f.edu-servers.net              172800     A    192.35.51.30
+       g.edu-servers.net              172800     A    192.42.93.30
+       l.edu-servers.net              172800     A    192.41.162.30
+       g.edu-servers.net              172800     AAAA 2001:503:cc2c:0:0:0:2:36
+Query ID     27133 www.stanford.edu  A --> 192.5.6.30
+Response ID: 27133 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+       stanford.edu                   172800     NS   avallone.stanford.edu
+       stanford.edu                   172800     NS   atalante.stanford.edu
+       stanford.edu                   172800     NS   argus.stanford.edu
+       stanford.edu                   172800     NS   ns5.dnsmadeeasy.com
+       stanford.edu                   172800     NS   ns6.dnsmadeeasy.com
+       stanford.edu                   172800     NS   ns7.dnsmadeeasy.com
+  Additional Information (9)
+       avallone.stanford.edu          172800     A    204.63.227.77
+       atalante.stanford.edu          172800     A    171.64.7.61
+       atalante.stanford.edu          172800     AAAA 2607:f6d0:0:d32:0:0:ab40:73d
+       argus.stanford.edu             172800     A    171.64.7.115
+       argus.stanford.edu             172800     AAAA 2607:f6d0:0:9113:0:0:ab40:773
+       ns5.dnsmadeeasy.com            172800     A    208.94.148.13
+       ns5.dnsmadeeasy.com            172800     AAAA 2600:1800:5:0:0:0:0:1
+       ns6.dnsmadeeasy.com            172800     A    208.80.124.13
+       ns7.dnsmadeeasy.com            172800     A    208.80.126.13
+Query ID     58664 www.stanford.edu  A --> 204.63.227.77
+Response ID: 58664 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+       www.stanford.edu               172800     NS   ns-514.awsdns-00.net
+       www.stanford.edu               172800     NS   ns-2027.awsdns-61.co.uk
+       www.stanford.edu               172800     NS   ns-309.awsdns-38.com
+       www.stanford.edu               172800     NS   ns-1234.awsdns-26.org
+Query ID     17 www.stanford.edu  A --> 205.251.194.2
+Response ID: 17 Authoritative = true
+  Answers (3)
+       www.stanford.edu               60         A    52.26.62.109
+       www.stanford.edu               60         A    52.32.123.204
+       www.stanford.edu               60         A    52.37.14.176
+  Nameservers (4)
+       www.stanford.edu               172800     NS   ns-1234.awsdns-26.org
+       www.stanford.edu               172800     NS   ns-2027.awsdns-61.co.uk
+       www.stanford.edu               172800     NS   ns-309.awsdns-38.com
+       www.stanford.edu               172800     NS   ns-514.awsdns-00.net
+www.stanford.edu 60    A 52.26.62.109
+www.stanford.edu 60    A 52.32.123.204
+www.stanford.edu 60    A 52.37.14.176
+
+
+Test 18 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 www.stanford.edu -t6
+Query ID     43816 www.stanford.edu  AAAA --> 199.7.83.42
+Response ID: 43816 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+       edu                            172800     NS   a.edu-servers.net
+       edu                            172800     NS   c.edu-servers.net
+       edu                            172800     NS   d.edu-servers.net
+       edu                            172800     NS   f.edu-servers.net
+       edu                            172800     NS   g.edu-servers.net
+       edu                            172800     NS   l.edu-servers.net
+  Additional Information (7)
+       a.edu-servers.net              172800     A    192.5.6.30
+       c.edu-servers.net              172800     A    192.26.92.30
+       d.edu-servers.net              172800     A    192.31.80.30
+       f.edu-servers.net              172800     A    192.35.51.30
+       g.edu-servers.net              172800     A    192.42.93.30
+       l.edu-servers.net              172800     A    192.41.162.30
+       g.edu-servers.net              172800     AAAA 2001:503:cc2c:0:0:0:2:36
+Query ID     60250 www.stanford.edu  AAAA --> 192.5.6.30
+Response ID: 60250 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+       stanford.edu                   172800     NS   avallone.stanford.edu
+       stanford.edu                   172800     NS   atalante.stanford.edu
+       stanford.edu                   172800     NS   argus.stanford.edu
+       stanford.edu                   172800     NS   ns5.dnsmadeeasy.com
+       stanford.edu                   172800     NS   ns6.dnsmadeeasy.com
+       stanford.edu                   172800     NS   ns7.dnsmadeeasy.com
+  Additional Information (9)
+       avallone.stanford.edu          172800     A    204.63.227.77
+       atalante.stanford.edu          172800     A    171.64.7.61
+       atalante.stanford.edu          172800     AAAA 2607:f6d0:0:d32:0:0:ab40:73d
+       argus.stanford.edu             172800     A    171.64.7.115
+       argus.stanford.edu             172800     AAAA 2607:f6d0:0:9113:0:0:ab40:773
+       ns5.dnsmadeeasy.com            172800     A    208.94.148.13
+       ns5.dnsmadeeasy.com            172800     AAAA 2600:1800:5:0:0:0:0:1
+       ns6.dnsmadeeasy.com            172800     A    208.80.124.13
+       ns7.dnsmadeeasy.com            172800     A    208.80.126.13
+Query ID     42020 www.stanford.edu  AAAA --> 204.63.227.77
+Response ID: 42020 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+       www.stanford.edu               172800     NS   ns-2027.awsdns-61.co.uk
+       www.stanford.edu               172800     NS   ns-1234.awsdns-26.org
+       www.stanford.edu               172800     NS   ns-309.awsdns-38.com
+       www.stanford.edu               172800     NS   ns-514.awsdns-00.net
+Query ID     23799 www.stanford.edu  AAAA --> 205.251.199.235
+Response ID: 23799 Authoritative = true
+  Answers (3)
+       www.stanford.edu               60         A    52.37.14.176
+       www.stanford.edu               60         A    52.26.62.109
+       www.stanford.edu               60         A    52.32.123.204
+  Nameservers (4)
+       www.stanford.edu               172800     NS   ns-1234.awsdns-26.org
+       www.stanford.edu               172800     NS   ns-2027.awsdns-61.co.uk
+       www.stanford.edu               172800     NS   ns-309.awsdns-38.com
+       www.stanford.edu               172800     NS   ns-514.awsdns-00.net
+www.stanford.edu 60    A 52.37.14.176
+www.stanford.edu 60    A 52.26.62.109
+www.stanford.edu 60    A 52.32.123.204
+
+
+Test 19 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 finance.google.ca -t
+Query ID     57626 finance.google.ca  A --> 199.7.83.42
+Response ID: 57626 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+       ca                             172800     NS   c.ca-servers.ca
+       ca                             172800     NS   d.ca-servers.ca
+       ca                             172800     NS   j.ca-servers.ca
+       ca                             172800     NS   any.ca-servers.ca
+  Additional Information (8)
+       c.ca-servers.ca                172800     A    185.159.196.2
+       d.ca-servers.ca                172800     A    199.19.4.1
+       j.ca-servers.ca                172800     A    198.182.167.1
+       any.ca-servers.ca              172800     A    199.4.144.2
+       c.ca-servers.ca                172800     AAAA 2620:10a:8053:0:0:0:0:2
+       d.ca-servers.ca                172800     AAAA 2001:500:97:0:0:0:0:1
+       j.ca-servers.ca                172800     AAAA 2001:500:83:0:0:0:0:1
+       any.ca-servers.ca              172800     AAAA 2001:500:a7:0:0:0:0:2
+Query ID     15211 finance.google.ca  A --> 185.159.196.2
+Response ID: 15211 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+       google.ca                      86400      NS   ns4.google.com
+       google.ca                      86400      NS   ns2.google.com
+       google.ca                      86400      NS   ns1.google.com
+       google.ca                      86400      NS   ns3.google.com
+Query ID     38550 finance.google.ca  A --> 216.239.38.10
+Response ID: 38550 Authoritative = true
+  Answers (3)
+       finance.google.ca              345600     CN   finance.google.com
+       finance.google.com             604800     CN   www3.l.google.com
+       www3.l.google.com              300        A    172.217.3.206
+finance.google.ca 345600    CN finance.google.com
+finance.google.ca 604800    CN www3.l.google.com
+finance.google.ca 300    A 172.217.3.206
+Query ID     49093 www3.l.google.com  A --> 199.7.83.42
+Response ID: 49093 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       com                            172800     NS   a.gtld-servers.net
+       com                            172800     NS   b.gtld-servers.net
+       com                            172800     NS   c.gtld-servers.net
+       com                            172800     NS   d.gtld-servers.net
+       com                            172800     NS   e.gtld-servers.net
+       com                            172800     NS   f.gtld-servers.net
+       com                            172800     NS   g.gtld-servers.net
+       com                            172800     NS   h.gtld-servers.net
+       com                            172800     NS   i.gtld-servers.net
+       com                            172800     NS   j.gtld-servers.net
+       com                            172800     NS   k.gtld-servers.net
+       com                            172800     NS   l.gtld-servers.net
+       com                            172800     NS   m.gtld-servers.net
+  Additional Information (14)
+       a.gtld-servers.net             172800     A    192.5.6.30
+       b.gtld-servers.net             172800     A    192.33.14.30
+       c.gtld-servers.net             172800     A    192.26.92.30
+       d.gtld-servers.net             172800     A    192.31.80.30
+       e.gtld-servers.net             172800     A    192.12.94.30
+       f.gtld-servers.net             172800     A    192.35.51.30
+       g.gtld-servers.net             172800     A    192.42.93.30
+       h.gtld-servers.net             172800     A    192.54.112.30
+       i.gtld-servers.net             172800     A    192.43.172.30
+       j.gtld-servers.net             172800     A    192.48.79.30
+       k.gtld-servers.net             172800     A    192.52.178.30
+       l.gtld-servers.net             172800     A    192.41.162.30
+       m.gtld-servers.net             172800     A    192.55.83.30
+       a.gtld-servers.net             172800     AAAA 2001:503:a83e:0:0:0:2:30
+Query ID     1876 www3.l.google.com  A --> 192.5.6.30
+Response ID: 1876 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+       google.com                     172800     NS   ns2.google.com
+       google.com                     172800     NS   ns1.google.com
+       google.com                     172800     NS   ns3.google.com
+       google.com                     172800     NS   ns4.google.com
+  Additional Information (4)
+       ns2.google.com                 172800     A    216.239.34.10
+       ns1.google.com                 172800     A    216.239.32.10
+       ns3.google.com                 172800     A    216.239.36.10
+       ns4.google.com                 172800     A    216.239.38.10
+Query ID     57663 www3.l.google.com  A --> 216.239.34.10
+Response ID: 57663 Authoritative = true
+  Answers (1)
+       www3.l.google.com              300        A    172.217.3.206
+finance.google.ca 300    A 172.217.3.206
+
+
+Test 20 -----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 finance.google.ca -t6
+Query ID     30080 finance.google.ca  AAAA --> 199.7.83.42
+Response ID: 30080 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+       ca                             172800     NS   c.ca-servers.ca
+       ca                             172800     NS   d.ca-servers.ca
+       ca                             172800     NS   j.ca-servers.ca
+       ca                             172800     NS   any.ca-servers.ca
+  Additional Information (8)
+       c.ca-servers.ca                172800     A    185.159.196.2
+       d.ca-servers.ca                172800     A    199.19.4.1
+       j.ca-servers.ca                172800     A    198.182.167.1
+       any.ca-servers.ca              172800     A    199.4.144.2
+       c.ca-servers.ca                172800     AAAA 2620:10a:8053:0:0:0:0:2
+       d.ca-servers.ca                172800     AAAA 2001:500:97:0:0:0:0:1
+       j.ca-servers.ca                172800     AAAA 2001:500:83:0:0:0:0:1
+       any.ca-servers.ca              172800     AAAA 2001:500:a7:0:0:0:0:2
+Query ID     53221 finance.google.ca  AAAA --> 185.159.196.2
+Response ID: 53221 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+       google.ca                      86400      NS   ns4.google.com
+       google.ca                      86400      NS   ns2.google.com
+       google.ca                      86400      NS   ns1.google.com
+       google.ca                      86400      NS   ns3.google.com
+Query ID     58762 finance.google.ca  AAAA --> 216.239.38.10
+Response ID: 58762 Authoritative = true
+  Answers (3)
+       finance.google.ca              345600     CN   finance.google.com
+       finance.google.com             604800     CN   www3.l.google.com
+       www3.l.google.com              300        A    172.217.3.206
+finance.google.ca 345600    CN finance.google.com
+finance.google.ca 604800    CN www3.l.google.com
+finance.google.ca 300    A 172.217.3.206
+Query ID     46226 www3.l.google.com  AAAA --> 199.7.83.42
+Response ID: 46226 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       com                            172800     NS   a.gtld-servers.net
+       com                            172800     NS   b.gtld-servers.net
+       com                            172800     NS   c.gtld-servers.net
+       com                            172800     NS   d.gtld-servers.net
+       com                            172800     NS   e.gtld-servers.net
+       com                            172800     NS   f.gtld-servers.net
+       com                            172800     NS   g.gtld-servers.net
+       com                            172800     NS   h.gtld-servers.net
+       com                            172800     NS   i.gtld-servers.net
+       com                            172800     NS   j.gtld-servers.net
+       com                            172800     NS   k.gtld-servers.net
+       com                            172800     NS   l.gtld-servers.net
+       com                            172800     NS   m.gtld-servers.net
+  Additional Information (14)
+       a.gtld-servers.net             172800     A    192.5.6.30
+       b.gtld-servers.net             172800     A    192.33.14.30
+       c.gtld-servers.net             172800     A    192.26.92.30
+       d.gtld-servers.net             172800     A    192.31.80.30
+       e.gtld-servers.net             172800     A    192.12.94.30
+       f.gtld-servers.net             172800     A    192.35.51.30
+       g.gtld-servers.net             172800     A    192.42.93.30
+       h.gtld-servers.net             172800     A    192.54.112.30
+       i.gtld-servers.net             172800     A    192.43.172.30
+       j.gtld-servers.net             172800     A    192.48.79.30
+       k.gtld-servers.net             172800     A    192.52.178.30
+       l.gtld-servers.net             172800     A    192.41.162.30
+       m.gtld-servers.net             172800     A    192.55.83.30
+       a.gtld-servers.net             172800     AAAA 2001:503:a83e:0:0:0:2:30
+Query ID     45281 www3.l.google.com  AAAA --> 192.5.6.30
+Response ID: 45281 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+       google.com                     172800     NS   ns2.google.com
+       google.com                     172800     NS   ns1.google.com
+       google.com                     172800     NS   ns3.google.com
+       google.com                     172800     NS   ns4.google.com
+  Additional Information (4)
+       ns2.google.com                 172800     A    216.239.34.10
+       ns1.google.com                 172800     A    216.239.32.10
+       ns3.google.com                 172800     A    216.239.36.10
+       ns4.google.com                 172800     A    216.239.38.10
+Query ID     9617 www3.l.google.com  AAAA --> 216.239.34.10
+Response ID: 9617 Authoritative = true
+  Answers (1)
+       www3.l.google.com              300        A    172.217.3.206
+finance.google.ca 300    A 172.217.3.206
+
+
+Test 21 RCODE = 5-----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 .ca -t
+Query ID     4239 .ca  A --> 199.7.83.42
+Response ID: 4239 Authoritative = false
+Query ID     43983 .ca  A --> 127.0.0.1
+.ca -2	A 0.0.0.0
+
+
+Test 22 SOA returned-----------------------------------------------
+
+
+java -jar DNSlookup.jar   199.7.83.42 ca
+Query ID     9914 ca  A --> 199.7.83.42
+Response ID: 9914 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+       ca                             172800     NS   c.ca-servers.ca
+       ca                             172800     NS   d.ca-servers.ca
+       ca                             172800     NS   j.ca-servers.ca
+       ca                             172800     NS   any.ca-servers.ca
+  Additional Information (8)
+       c.ca-servers.ca                172800     A    185.159.196.2
+       d.ca-servers.ca                172800     A    199.19.4.1
+       j.ca-servers.ca                172800     A    198.182.167.1
+       any.ca-servers.ca              172800     A    199.4.144.2
+       c.ca-servers.ca                172800     AAAA 2620:10a:8053:0:0:0:0:2
+       d.ca-servers.ca                172800     AAAA 2001:500:97:0:0:0:0:1
+       j.ca-servers.ca                172800     AAAA 2001:500:83:0:0:0:0:1
+       any.ca-servers.ca              172800     AAAA 2001:500:a7:0:0:0:0:2
+Query ID     40688 ca  A --> 185.159.196.2
+Response ID: 40688 Authoritative = true
+  Answers (0)
+  Nameservers (1)
+       ca                             3600       6    
+Query ID     45960 ca  A --> 127.0.0.1
+ca -2	A 0.0.0.0
